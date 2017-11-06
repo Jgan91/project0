@@ -1,13 +1,25 @@
+const render = function () {
+  // const $board = $( '.board' );
+  // console.log( $board );
+  // const $square0 = $( '[data-x="0"][data-y="0"]' );
+  // const $square1 = $( '[data-x="1"][data-y="0"]' );
+  // console.log( $square0 );
+}
+
 $( document ).ready( function () {
   $( '.board' ).on( 'click', function() {
-    const clickCoordinate = $( this ).attr( 'id' );
+    const x = $( this ).data( 'x' );
+    const y = $( this ).data( 'y' );
+    console.log( x, y );
+    // 
+    // if ( turn % 2 === 0 ) {
+    //   $( this ).text( 'X' );
+    // }
+    // else {
+    //   $( this ).text( 'O' );
+    // }
 
-    if ( turn % 2 === 0 ) {
-      $( this ).text( 'X' );
-    }
-    else {
-      $( this ).text( 'O' );
-    }
-    turn += 1;
+    $( this ).text( takeTurn( x, y ) );
+
   });
 });

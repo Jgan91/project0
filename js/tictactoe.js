@@ -11,12 +11,15 @@ let turn = 0;
 
 const takeTurn = function ( x, y ) {
   console.log( board );
-  if ( turn % 2 === 0 ) {
-    board[x][y] = 'X';
-  } else {
-    board[x][y] = 'O';
+  if ( board[x][y] === '_' ) {
+    if ( turn % 2 === 0 ) {
+      board[x][y] = 'X';
+    } else {
+      board[x][y] = 'O';
+    }
+    turn += 1;
+    return board[x][y];
   }
-  turn += 1
 }
 
 const gameOver = function () {

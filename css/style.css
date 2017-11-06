@@ -1,5 +1,7 @@
 html {
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .board {
@@ -8,9 +10,10 @@ html {
   width: 50px;
   border: 1px solid black;
   text-align: center;
-  line-height: 50px
+  line-height: 50px;
 }
 
-p {
+div {
   margin: 0;
+  padding: 0;
 }
