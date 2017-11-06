@@ -34,20 +34,11 @@ const checkWin = function () {
 
 const checkRows = function () {
   for ( let i = 0; i < height; i++ ) {
-    if ( checkRow( board[ i ] ) ) {
+    if ( checkLine( board[ i ] ) ) {
       return true;
     }
   }
   return false;
-}
-
-const checkRow = function ( row ) {
-  const unique = [ ... new Set( row ) ];
-  if ( unique.length === 1 && unique[ 0 ] !== '_' ) {
-    return true;
-  } else {
-    return false;
-  }
 }
 
 const checkColumns = function () {
@@ -56,13 +47,20 @@ const checkColumns = function () {
     for ( let j = 0; j < length; j++ ) {
       column.push( board[ j ][ i ] );
     }
-    const unique = [ ... new Set( column ) ];
-    console.log( unique );
-    if ( unique.length === 1 && unique[ 0 ] !== '_' ) {
+    if ( checkLine( column ) ) {
       return true;
     }
   }
   return false;
+}
+
+const checkLine = function ( line ) {
+  const unique = [ ... new Set( line ) ];
+  if ( unique.length === 1 && unique[ 0 ] !== '_' ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 $( document ).ready( function () {
