@@ -1,0 +1,16 @@
+html {
+  font-family: sans-serif;
+}
+
+.board {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 50px
+}
+
+p {
+  margin: 0;
+}
