@@ -6,7 +6,7 @@ $( document ).ready( function () {
     if ( !gameOver() ) {
       $( this ).text( takeTurn( x, y ) );
       if ( gameOver() ) {
-        $( '.msg' ).text( `Congratulations player "${ player }". A winner is you!`);
+        $( '.msg' ).text( `Congratulations player "${ currentPlayer }". A winner is you!`);
       }
       if ( gameOver() === 'draw' ) {
         $( '.msg' ).text( `It's a draw. How deeply unsatisfying.`);

@@ -8,19 +8,19 @@ const height = 3;
 const length = 3;
 
 let turn = 0;
-let player = 'X';
+let currentPlayer = 'X';
 
 const takeTurn = function ( x, y ) {
   if ( board[x][y] === '_' ) {
-    if ( player === 'X' ) {
+    if ( currentPlayer === 'X' ) {
       board[x][y] = 'X';
       if ( !gameOver() ) {
-        player = 'O';
+        currentPlayer = 'O';
       }
     } else {
       board[x][y] = 'O';
       if ( !gameOver() ) {
-        player = 'X';
+        currentPlayer = 'X';
       }
     }
     turn += 1;
