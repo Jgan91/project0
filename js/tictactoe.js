@@ -4,6 +4,9 @@ const board = [
   [ '_', '_', '_' ]
 ];
 
+const height = 3;
+const length = 3;
+
 let turn = 0;
 
 const takeTurn = function ( x, y ) {
@@ -30,21 +33,36 @@ const checkWin = function () {
 }
 
 const checkRows = function () {
-  let win = true;
-  for ( let i = 0; i < board.length; i++ ) {
-    if ( checkRow( board[ i ] )
+  for ( let i = 0; i < height; i++ ) {
+    if ( checkRow( board[ i ] ) ) {
+      return true;
+    }
   }
+  return false;
 }
 
 const checkRow = function ( row ) {
-  let win = true;
-  for ( let i = 1; i < board.length; i++ ) {
-    if ( row[ i ] === '_' || row[ i ] !== row[ i - 1 ] ) {
-      win = false;
-      break;
+  const unique = [ ... new Set( row ) ];
+  if ( unique.length === 1 && unique[ 0 ] !== '_' ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+const checkColumns = function () {
+  for ( let i = 0; i < height; i++ ) {
+    const column = [];
+    for ( let j = 0; j < length; j++ ) {
+      column.push( board[ j ][ i ] );
+    }
+    const unique = [ ... new Set( column ) ];
+    console.log( unique );
+    if ( unique.length === 1 && unique[ 0 ] !== '_' ) {
+      return true;
     }
   }
-  return win;
+  return false;
 }
 
 $( document ).ready( function () {
