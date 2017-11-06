@@ -19,7 +19,7 @@ const takeTurn = function ( x, y ) {
   turn += 1
 }
 
-const checkWin = function () {
+const gameOver = function () {
   if ( checkRows() ) {
     return true;
   }
@@ -73,32 +73,3 @@ const checkLine = function ( line ) {
     return false;
   }
 }
-
-$( document ).ready( function () {
-  $( '.board' ).on( 'click', function() {
-    const clickedSquareCoordinate = $( this ).attr( 'id' );
-
-    if ( turn % 2 === 0 ) {
-      $( this ).text( 'X' );
-    }
-    else {
-      $( this ).text( 'O' );
-    }
-    turn += 1;
-  });
-});
-
-// let coordinates = {
-//   0: {
-//     x: 0,
-//     y: 0
-//   },
-//   1: board[ 0 ][ 1 ],
-//   2: board[ 0 ][ 2 ],
-//   3: board[ 1 ][ 0 ],
-//   4: board[ 1 ][ 1 ],
-//   5: board[ 1 ][ 2 ],
-//   6: board[ 2 ][ 0 ],
-//   7: board[ 2 ][ 1 ],
-//   8: board[ 2 ][ 2 ]
-// }
