@@ -8,18 +8,27 @@ const height = 3;
 const length = 3;
 
 let turn = 0;
+let player = 'X';
 
 const takeTurn = function ( x, y ) {
-  console.log( board );
-  if ( board[x][y] === '_' ) {
-    if ( turn % 2 === 0 ) {
-      board[x][y] = 'X';
-    } else {
-      board[x][y] = 'O';
-    }
-    turn += 1;
-    return board[x][y];
+  if ( board[x][y] !== '_' ) {
+    return `You can't play a move there. Try again.`;
   }
+
+  if ( player === 'X' ) {
+    board[x][y] = 'X';
+    if ( !gameOver() ) {
+      player = 'O';
+    }
+  } else {
+    board[x][y] = 'O';
+    if ( !gameOver() ) {
+      player = 'X';
+    }
+  }
+  turn += 1;
+
+  return board[x][y];
 }
 
 const gameOver = function () {
