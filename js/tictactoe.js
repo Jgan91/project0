@@ -12,9 +12,9 @@ let turn = 0;
 const takeTurn = function ( x, y ) {
   console.log( board );
   if ( turn % 2 === 0 ) {
-    board[y][x] = 'X';
+    board[x][y] = 'X';
   } else {
-    board[y][x] = 'O';
+    board[x][y] = 'O';
   }
   turn += 1
 }
@@ -52,6 +52,17 @@ const checkColumns = function () {
     }
   }
   return false;
+}
+
+const checkDiagonals = function () {
+  const topBottom = [ board[ 0 ][ 0 ], board[ 1 ][ 1 ], board[ 2 ][ 2 ] ];
+  const bottomTop = [ board[ 2 ][ 0 ], board[ 1 ][ 1 ], board[ 0 ][ 2 ] ];
+  if ( checkLine( topBottom ) || checkLine( bottomTop ) ) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 const checkLine = function ( line ) {
