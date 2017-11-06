@@ -30,21 +30,18 @@ const checkWin = function () {
 }
 
 const checkRows = function () {
-  let win = false;
+  let win = true;
   for ( let i = 0; i < board.length; i++ ) {
-    if ( checkRow( board[ i ] ) ) {
-
-    }
+    if ( checkRow( board[ i ] )
   }
 }
 
 const checkRow = function ( row ) {
-  let win = false;
+  let win = true;
   for ( let i = 1; i < board.length; i++ ) {
-    if ( row[ i ] !== '_' || row[ i ] !== row[ i - 1 ] ) {
-      win = true;
-    } else {
+    if ( row[ i ] === '_' || row[ i ] !== row[ i - 1 ] ) {
       win = false;
+      break;
     }
   }
   return win;
