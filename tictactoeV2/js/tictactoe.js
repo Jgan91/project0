@@ -1,5 +1,3 @@
-console.log( 'working' );
-
 const State = function ( old ) {
 
   this.turn = '',
