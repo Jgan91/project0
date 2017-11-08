@@ -10,7 +10,7 @@ const State = function ( old ) {
 
   // begin object construction
   // copy old board
-  if ( typeof old !== undefined ) {
+  if ( typeof old !== 'undefined' ) {
     const area = old.board.length;
     this.board = [];
     for ( let i = 0; i < area; i++ ) {
@@ -33,10 +33,11 @@ const State = function ( old ) {
   }
 
   this.getEmptyCells = function () {
-    const area = old.board.length;
+    debugger;
+    const area = this.board.length;
     const emptyCellIndexes = [];
     for ( let i = 0; i < area; i++ ) {
-      if ( this.board === '_' ) {
+      if ( this.board[ i ] === '_' ) {
         emptyCellIndexes.push( i );
       }
     }
@@ -83,4 +84,59 @@ const State = function ( old ) {
     }
   }
 
+}
+
+const Game = function (aiPlayer) {
+  // initialize game
+  this.ai = aiPlayer;
+
+  this.currentState = new State();
+
+  this.currentState.board = [ '_', '_', '_',
+                              '_', '_', '_',
+                              '_', '_', '_' ];
+
+  // 'X' plays first
+  this.currentState.turn = 'X';
+
+  this.status = 'beginning';
+
+  // transition function
+  this.advanceTo = function ( _state ) {
+    this.currentState = _state;
+    debugger;
+    if ( _state.isTerminal() ) {
+      this.status = 'ended';
+
+      if ( _state.result === 'X-won' ) {
+        ui.switchViewTo( 'won' );
+      }
+      else if ( _state.result === 'O-won' ) {
+        ui.switchViewTo( 'lost' );
+      }
+      else {
+        ui.switchViewTo( 'draw' );
+      }
+    }
+    // if game still running
+    else {
+      debugger;
+      if ( this.currentState.turn === 'X' ) {
+        ui.switchViewTo( 'human' );
+      }
+      else {
+        ui.switchViewTo( 'robot' );
+
+        this.ai.notify( 'O' );
+      }
+    }
+  }
+
+  this.start = function () {
+    debugger;
+    if ( this.status === 'beginning' ) {
+      this.advanceTo( this.currentState );
+      this.status = 'running';
+    }
+  }
 }
