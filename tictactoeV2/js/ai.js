@@ -22,12 +22,12 @@ const AIAction = function ( pos ) {
 
 const AI = function () {
   // private variable: game being played
-  const game = {};
+  let game = {};
 
   // private function: chooses a random cell
   const makeRandomMove = function ( turn ) {
     const emptyCells = game.currentState.getEmptyCells();
-    const randomCell = emptyCells[ Math.floor( Math.random * emptyCells.length )];
+    const randomCell = emptyCells[ Math.floor( Math.random() * emptyCells.length )];
     const action = new AIAction( randomCell );
 
     const next = action.applyTo( game.currentState );
@@ -39,13 +39,13 @@ const AI = function () {
   }
 
   // public method: unsure of what this does
-  this.plays = function(_game) {
+  this.plays = function ( _game ) {
     game = _game;
   };
 
   // public method: notify the AI that it's its turn
   this.notify = function( turn ) {
-
+    makeRandomMove( turn );
   }
 
 }

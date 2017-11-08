@@ -33,7 +33,6 @@ const State = function ( old ) {
   }
 
   this.getEmptyCells = function () {
-    debugger;
     const area = this.board.length;
     const emptyCellIndexes = [];
     for ( let i = 0; i < area; i++ ) {
@@ -104,36 +103,36 @@ const Game = function (aiPlayer) {
   // transition function
   this.advanceTo = function ( _state ) {
     this.currentState = _state;
-    debugger;
+    debugger
     if ( _state.isTerminal() ) {
       this.status = 'ended';
 
       if ( _state.result === 'X-won' ) {
-        ui.switchViewTo( 'won' );
+        // ui.switchViewTo( 'won' );
+        console.log( 'won' );
       }
       else if ( _state.result === 'O-won' ) {
-        ui.switchViewTo( 'lost' );
+        // ui.switchViewTo( 'lost' );
+        console.log( 'lost' );
       }
       else {
-        ui.switchViewTo( 'draw' );
+        // ui.switchViewTo( 'draw' );
+        console.log( 'draw' );
       }
     }
     // if game still running
     else {
-      debugger;
       if ( this.currentState.turn === 'X' ) {
-        ui.switchViewTo( 'human' );
+        // ui.switchViewTo( 'human' );
       }
       else {
-        ui.switchViewTo( 'robot' );
-
+        // ui.switchViewTo( 'robot' );
         this.ai.notify( 'O' );
       }
     }
   }
 
   this.start = function () {
-    debugger;
     if ( this.status === 'beginning' ) {
       this.advanceTo( this.currentState );
       this.status = 'running';
