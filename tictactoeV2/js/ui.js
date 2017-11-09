@@ -9,7 +9,6 @@ ui.switchViewTo = function ( turn ) {
   const _switch = function ( _turn ) {
     ui.currentView = '#' + _turn;
     $( ui.currentView ).fadeIn( 'fast' );
-    console.log( _turn === 'won' );
     if ( _turn === 'won' || _turn === 'lost' || _turn === 'draw' ) {
       $( '#replay, #confirm' ).fadeIn( 'fast' );
     }
@@ -49,9 +48,15 @@ ui.insertAt = function ( index, symbol ) {
 ui.resetBoard = function () {
   $( '.cell' ).text( '' ).removeClass( 'occupied' );
   $( '#replay, #pester, #confirm' ).fadeOut( 'fast' );
+  $( '.turns' ).empty();
 }
 
 ui.pester = function () {
   $( '#replay').hide();
   $( '#pester').fadeOut( 'fast' ).fadeIn( 'fast ' );
+}
+
+ui.showHistory = function () {
+  const history = globals.game.currentState.history;
+  $( '.turns' ).append( `<div data-turn='${ history.length - 1 }'>Turn ${ history.length - 1 }</div>` );
 }

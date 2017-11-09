@@ -104,8 +104,8 @@ const Game = function (aiPlayer) {
   // transition function
   this.advanceTo = function ( _state ) {
     this.currentState = _state;
-    debugger;
-    _state.history.push( _state )
+    _state.history.push( _state );
+    ui.showHistory();
     if ( _state.isTerminal() ) {
       this.status = 'ended';
 
@@ -122,16 +122,13 @@ const Game = function (aiPlayer) {
     // if game still running
     else {
       if ( _state.turn === 'X' ) {
-        console.log( 'human' );
         ui.switchViewTo( 'human' );
       }
       else {
-        console.log( 'robot' );
         ui.switchViewTo( 'robot' );
         this.ai.notify( 'O' );
       }
     }
-    debugger;
   }
 
   this.start = function () {

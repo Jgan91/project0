@@ -46,9 +46,14 @@ $( document ).ready( function () {
     aiPlayer.plays( globals.game );
 
     globals.game.start();
-  })
+  });
 
   $( '#denied' ).on( 'click', function () {
     ui.pester();
-  })
+  });
+
+  $( '.turns' ).on( 'click', 'div', function () {
+    console.log( 'anything?' );
+    console.log( $( this ) );
+  });
 });
