@@ -55,12 +55,20 @@ $( document ).ready( function () {
 
   $( '.turns' ).on( 'click', 'div', function () {
     const clickedTurn = $( this ).data( 'turn' );
-    debugger;
     const histories = globals.game.currentState.history;
     const chosenTurn = histories[ clickedTurn ];
-    const returnBoard = chosenTurn.board;
+    const returnBoard = chosenTurn.currentState.board;
+    console.log( histories );
+    console.log( chosenTurn );
     console.log( returnBoard );
     ui.resetBoard();
+
+    for ( let i = 0; i < returnBoard.length; i++ ) {
+      debugger;
+      if ( returnBoard[i] !== '_' ) {
+        ui.insertAt( i, returnBoard[ i ] );
+      }
+    }
 
     const aiPlayer = new AI ( globals.game.ai.AIDifficulty );
     globals.game = new Game( aiPlayer );
@@ -68,12 +76,6 @@ $( document ).ready( function () {
     aiPlayer.plays( globals.game );
 
     globals.game.start();
-
-    for ( let i = 0; i < returnBoard.length; i++ ) {
-      if ( returnBoard[i] !== '_' ) {
-        ui.insertAt( i, returnBoard[ i ] );
-      }
-    }
 
   });
 });

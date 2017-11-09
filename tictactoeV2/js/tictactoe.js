@@ -104,8 +104,11 @@ const Game = function (aiPlayer) {
   // transition function
   this.advanceTo = function ( _state ) {
     this.currentState = _state;
-    _state.history.push( _state );
+
+
+    _state.history.push( globals.game );
     ui.showHistory();
+
     if ( _state.isTerminal() ) {
       this.status = 'ended';
 
