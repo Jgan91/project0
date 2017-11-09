@@ -46,9 +46,9 @@ AIAction.descending = function ( firstAction, secondAction ) {
 }
 
 
-const AI = function ( intelligence ) {
+const AI = function ( difficulty ) {
 
-  const levelOfIntelligence = intelligence;
+  const AIDifficulty = difficulty;
   // private variable: game being played
   let game = {};
 
@@ -122,7 +122,6 @@ const AI = function ( intelligence ) {
 
       return action;
     });
-    console.log( this, availableActions );
 
     if ( game.currentState.turn === 'X' ) {
       // X wants to maximize: put the largest value first
@@ -132,7 +131,6 @@ const AI = function ( intelligence ) {
     else if ( game.currentState.turn === 'O' ) {
       // O wants to minimize: put the smallest value first
       availableActions.sort( AIAction.ascending );
-      console.log( availableActions );
     }
 
     const chosenAction = availableActions[ 0 ];
@@ -144,17 +142,60 @@ const AI = function ( intelligence ) {
 
   }
 
-  // public method: unsure of what this does
+  const makeMediumMove = function ( turn ) {
+    const emptyCells = game.currentState.getEmptyCells();
+    const availableActions = emptyCells.map( function ( pos ) {
+      const action = new AIAction( pos );
+      const next = action.applyTo( game.currentState );
+
+      action.minimaxValue = minimaxValue( next );
+
+      return action;
+    });
+
+    if ( game.currentState.turn === 'X' ) {
+      availableActions.sort( AIAction.descending );
+    }
+    else if ( game.currentState.turn === 'O' ) {
+      availableActions.sort( AIAction.ascending );
+    }
+
+    let chosenAction = {};
+    const randomChoice = Math.floor( Math.random() * 2 );
+    
+    if ( randomChoice === 1 ) {
+      chosenAction = availableActions[ 0 ];
+    }
+    else if ( randomChoice === 0 ) {
+      // choose suboptimal choice if more than choice available
+      if ( availableActions.length >= 2 ) {
+        chosenAction = availableActions[ 1 ];
+      }
+      if ( availableActions.length === 1 ) {
+        chosenAction = availableActions[ 0 ];
+      }
+    }
+    const next = chosenAction.applyTo( game.currentState );
+
+    ui.insertAt( chosenAction.movePosition, turn );
+
+    game.advanceTo( next );
+  }
+
+  // public method: attaches ai to game
   this.plays = function ( _game ) {
     game = _game;
   };
 
   // public method: notify the AI that it's its turn
   this.notify = function( turn ) {
-    if ( levelOfIntelligence === 'random' ) {
+    if ( AIDifficulty === 'easy' ) {
       makeRandomMove( turn );
     }
-    else if ( levelOfIntelligence === 'master' ) {
+    else if ( AIDifficulty === 'medium' ) {
+      makeMediumMove( turn );
+    }
+    else if ( AIDifficulty === 'hard' ) {
       makeBestMove( turn );
     }
 

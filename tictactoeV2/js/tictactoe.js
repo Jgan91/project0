@@ -121,10 +121,10 @@ const Game = function (aiPlayer) {
     // if game still running
     else {
       if ( _state.turn === 'X' ) {
-        // ui.switchViewTo( 'human' );
+        ui.switchViewTo( 'human' );
       }
       else {
-        // ui.switchViewTo( 'robot' );
+        ui.switchViewTo( 'robot' );
         this.ai.notify( 'O' );
       }
     }

@@ -1,8 +1,18 @@
 const globals = {};
 
 $( document ).ready( function () {
+  $( '.level' ).each( function () {
+    const $this = $( this );
+    $this.on( 'click', function () {
+      $( '.selected' ).toggleClass( 'not-selected' );
+      $( '.selected' ).toggleClass( 'selected' );
+      $this.toggleClass( 'selected' );
+      $this.toggleClass( 'not-selected' );
+    });
+  });
+
   $( '.start' ).on( 'click', function () {
-    const selectedDifficulty = 'master';
+    const selectedDifficulty = $( '.selected' ).attr( 'id' );
     if ( typeof selectedDifficulty !== 'undefined' ) {
       const aiPlayer = new AI( selectedDifficulty );
       globals.game = new Game( aiPlayer );
