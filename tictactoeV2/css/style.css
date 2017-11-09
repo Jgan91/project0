@@ -31,3 +31,7 @@
 .start:hover, .level:hover {
   cursor: pointer;
 }
+
+.ingame {
+  display: none;
+}

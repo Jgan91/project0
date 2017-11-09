@@ -48,7 +48,7 @@ AIAction.descending = function ( firstAction, secondAction ) {
 
 const AI = function ( difficulty ) {
 
-  const AIDifficulty = difficulty;
+  this.AIDifficulty = difficulty;
   // private variable: game being played
   let game = {};
 
@@ -161,9 +161,9 @@ const AI = function ( difficulty ) {
     }
 
     let chosenAction = {};
-    const randomChoice = Math.floor( Math.random() * 2 );
-    
-    if ( randomChoice === 1 ) {
+    const randomChoice = Math.floor( Math.random() * 3 );
+
+    if ( randomChoice > 0 ) {
       chosenAction = availableActions[ 0 ];
     }
     else if ( randomChoice === 0 ) {
@@ -189,13 +189,13 @@ const AI = function ( difficulty ) {
 
   // public method: notify the AI that it's its turn
   this.notify = function( turn ) {
-    if ( AIDifficulty === 'easy' ) {
+    if ( this.AIDifficulty === 'easy' ) {
       makeRandomMove( turn );
     }
-    else if ( AIDifficulty === 'medium' ) {
+    else if ( this.AIDifficulty === 'medium' ) {
       makeMediumMove( turn );
     }
-    else if ( AIDifficulty === 'hard' ) {
+    else if ( this.AIDifficulty === 'hard' ) {
       makeBestMove( turn );
     }
 

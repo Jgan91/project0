@@ -37,4 +37,18 @@ $( document ).ready( function () {
       globals.game.advanceTo( next );
     }
   });
+
+  $( '#reset' ).on( 'click', function () {
+    ui.resetBoard();
+    const aiPlayer = new AI ( globals.game.ai.AIDifficulty );
+    globals.game = new Game( aiPlayer );
+
+    aiPlayer.plays( globals.game );
+
+    globals.game.start();
+  })
+
+  $( '#denied' ).on( 'click', function () {
+    ui.pester();
+  })
 });

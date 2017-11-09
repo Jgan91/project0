@@ -45,7 +45,7 @@ const State = function ( old ) {
   this.isTerminal = function () {
     const B = this.board;
     const area = this.board.length;
-    const len = area / 3;
+    const len = Math.sqrt( area );
 
     // check rows
     for ( let i = 0; i < area; i = i + 3) {
@@ -106,24 +106,26 @@ const Game = function (aiPlayer) {
       this.status = 'ended';
 
       if ( _state.result === 'X-won' ) {
-        // ui.switchViewTo( 'won' );
+        ui.switchViewTo( 'won' );
         console.log( 'won' );
       }
       else if ( _state.result === 'O-won' ) {
-        // ui.switchViewTo( 'lost' );
+        ui.switchViewTo( 'lost' );
         console.log( 'lost' );
       }
       else {
-        // ui.switchViewTo( 'draw' );
+        ui.switchViewTo( 'draw' );
         console.log( 'draw' );
       }
     }
     // if game still running
     else {
       if ( _state.turn === 'X' ) {
+        console.log( 'human' );
         ui.switchViewTo( 'human' );
       }
       else {
+        console.log( 'robot' );
         ui.switchViewTo( 'robot' );
         this.ai.notify( 'O' );
       }
