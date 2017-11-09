@@ -1,9 +1,7 @@
 const State = function ( old ) {
 
   this.turn = '',
-
   this.result = 'still running',
-
   this.aiMovesCount = 0,
 
   this.board = [];
@@ -11,15 +9,16 @@ const State = function ( old ) {
   // begin object construction
   // copy old board
   if ( typeof old !== 'undefined' ) {
+    this.turn = old.turn;
+    this.result = old.result;
+    this.aiMovesCount = old.aiMovesCount;
+
     const area = old.board.length;
     this.board = [];
     for ( let i = 0; i < area; i++ ) {
       this.board[i] = old.board[i];
     }
 
-    this.turn = old.turn;
-    this.result = old.result;
-    this.aiMovesCount = old.aiMovesCount;
   }
   // end object construction
 
@@ -65,8 +64,8 @@ const State = function ( old ) {
     }
 
     // check diagonals
-    for ( let i = 0; i < len; i = i + 2 ) {
-      if ( B[i] !== '_' && B[i] === B[i + 4] && B[i + 4] === B[i + 8] ) {
+    for ( let i = 0, j = 4; i < len; i = i + 2, j = j - 2 ) {
+      if ( B[i] !== '_' && B[i] === B[i + j] && B[i + j] === B[i + (j * 2)] ) {
         this.result = B[i] + '-won';
         return true;
       }
@@ -103,7 +102,6 @@ const Game = function (aiPlayer) {
   // transition function
   this.advanceTo = function ( _state ) {
     this.currentState = _state;
-    debugger
     if ( _state.isTerminal() ) {
       this.status = 'ended';
 
@@ -122,7 +120,7 @@ const Game = function (aiPlayer) {
     }
     // if game still running
     else {
-      if ( this.currentState.turn === 'X' ) {
+      if ( _state.turn === 'X' ) {
         // ui.switchViewTo( 'human' );
       }
       else {
@@ -136,6 +134,20 @@ const Game = function (aiPlayer) {
     if ( this.status === 'beginning' ) {
       this.advanceTo( this.currentState );
       this.status = 'running';
+    }
+  }
+}
+
+Game.score = function ( _state ) {
+  if ( _state.result !== 'still running' ) {
+    if ( _state.result === 'X-won' ) {
+      return 10 - _state.aiMovesCount;
+    }
+    else if ( _state.result === 'O-won' ) {
+      return -10 + _state.aiMovesCount;
+    }
+    else if ( _state.result === 'draw' ) {
+      return 0;
     }
   }
 }

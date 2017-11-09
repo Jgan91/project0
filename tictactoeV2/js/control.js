@@ -2,7 +2,7 @@ const globals = {};
 
 $( document ).ready( function () {
   $( '.start' ).on( 'click', function () {
-    const selectedDifficulty = 'random';
+    const selectedDifficulty = 'master';
     if ( typeof selectedDifficulty !== 'undefined' ) {
       const aiPlayer = new AI( selectedDifficulty );
       globals.game = new Game( aiPlayer );
