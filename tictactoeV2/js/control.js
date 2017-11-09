@@ -54,6 +54,6 @@ $( document ).ready( function () {
 
   $( '.turns' ).on( 'click', 'div', function () {
     console.log( 'anything?' );
-    console.log( $( this ) );
+    console.log( $( this ).data( 'turn' ) );
   });
 });
