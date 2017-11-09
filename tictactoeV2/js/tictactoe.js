@@ -6,6 +6,8 @@ const State = function ( old ) {
 
   this.board = [];
 
+  this.history = [];
+
   // begin object construction
   // copy old board
   if ( typeof old !== 'undefined' ) {
@@ -18,7 +20,7 @@ const State = function ( old ) {
     for ( let i = 0; i < area; i++ ) {
       this.board[i] = old.board[i];
     }
-
+    this.history = old.history;
   }
   // end object construction
 
@@ -102,20 +104,19 @@ const Game = function (aiPlayer) {
   // transition function
   this.advanceTo = function ( _state ) {
     this.currentState = _state;
+    debugger;
+    _state.history.push( _state )
     if ( _state.isTerminal() ) {
       this.status = 'ended';
 
       if ( _state.result === 'X-won' ) {
         ui.switchViewTo( 'won' );
-        console.log( 'won' );
       }
       else if ( _state.result === 'O-won' ) {
         ui.switchViewTo( 'lost' );
-        console.log( 'lost' );
       }
       else {
         ui.switchViewTo( 'draw' );
-        console.log( 'draw' );
       }
     }
     // if game still running
@@ -130,6 +131,7 @@ const Game = function (aiPlayer) {
         this.ai.notify( 'O' );
       }
     }
+    debugger;
   }
 
   this.start = function () {
