@@ -71,12 +71,12 @@ $( document ).ready( function () {
     globals.game.currentState.board = revertBoard;
 
     aiPlayer.plays( globals.game );
-    debugger;
 
     let isAiTurn = false;
     if ( globals.game.currentState.turn === 'O' ) {
-      currentPlayer = true;
+      isAiTurn = true;
     }
+    debugger;
     globals.game.start( isAiTurn );
 
   });
