@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tic Tac Toe v2</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery.js"></script>
+  <script src="tictactoeV2/js/ui.js"></script>
+  <script src="tictactoeV2/js/tictactoe.js"></script>
+  <script src="tictactoeV2/js/ai.js"></script>
+  <script src="tictactoeV2/js/control.js"></script>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="board">
+      <div class="cell" data-index="0"></div><!-- --><div class="cell" data-index="1"></div><!-- --><div class="cell" data-index="2"></div>
+      <div class="cell" data-index="3"></div><!-- --><div class="cell" data-index="4"></div><!-- --><div class="cell" data-index="5"></div>
+      <div class="cell" data-index="6"></div><!-- --><div class="cell" data-index="7"></div><!-- --><div class="cell" data-index="8"></div>
+    </div>
+
+    <div class="control">
+      <div class="initial">
+        <div class="difficulty">
+          <span class="level not-selected" id="easy">Easy</span>
+          <span class="level not-selected" id="medium">Medium</span>
+          <span class="level not-selected" id="hard">Hard</span>
+        </div>
+
+        <div class="start">Start</div>
+      </div>
+
+      <div class="ingame" id="human">Pick a square, any square</div>
+
+      <div class="ingame" id="won">Congratulations, a winner is you!</div>
+      <div class="ingame" id="lost">Welp, you lost.</div>
+      <div class="ingame" id="draw">It's a draw. How deeply unsatisfying.</div>
+
+      <div class="ingame" id="replay">Would you like to play again?</div>
+      <div class="ingame" id="pester">Sucks to be you then. Play again?</div>
+      <div class="ingame" id="confirm">
+        <span id="reset">Yes</span>
+        <span id="denied">No</span>
+      </div>
+    </div>
+
+    <div class="history">
+      <p>History</p>
+      <div class="turns"></div>
+    </div>
+
+  </div>
+
+</body>
+</html>
