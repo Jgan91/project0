@@ -126,7 +126,6 @@ const AI = function ( difficulty ) {
     if ( game.currentState.turn === 'X' ) {
       // X wants to maximize: put the largest value first
       availableActions.sort( AIAction.descending );
-      console.log( availableActions );
     }
     else if ( game.currentState.turn === 'O' ) {
       // O wants to minimize: put the smallest value first

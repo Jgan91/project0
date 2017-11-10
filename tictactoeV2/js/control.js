@@ -55,25 +55,29 @@ $( document ).ready( function () {
 
   $( '.turns' ).on( 'click', 'div', function () {
     const clickedTurn = $( this ).data( 'turn' );
-    debugger;
-    const histories = globals.game.currentState.history;
-    const chosenTurn = histories[ clickedTurn ];
-    const returnBoard = chosenTurn.board;
-    console.log( returnBoard );
+    const previousStates = globals.game.currentState.history;
+    const chosenTurn = previousStates[ clickedTurn ];
+    const revertBoard = chosenTurn.board;
     ui.resetBoard();
+
+    for ( let i = 0; i < revertBoard.length; i++ ) {
+      if ( revertBoard[i] !== '_' ) {
+        ui.insertAt( i, revertBoard[ i ] );
+      }
+    }
 
     const aiPlayer = new AI ( globals.game.ai.AIDifficulty );
     globals.game = new Game( aiPlayer );
+    globals.game.currentState.board = revertBoard;
 
     aiPlayer.plays( globals.game );
+    debugger;
 
-    globals.game.start();
-
-    for ( let i = 0; i < returnBoard.length; i++ ) {
-      if ( returnBoard[i] !== '_' ) {
-        ui.insertAt( i, returnBoard[ i ] );
-      }
+    let isAiTurn = false;
+    if ( globals.game.currentState.turn === 'O' ) {
+      currentPlayer = true;
     }
+    globals.game.start( isAiTurn );
 
   });
 });

@@ -104,8 +104,10 @@ const Game = function (aiPlayer) {
   // transition function
   this.advanceTo = function ( _state ) {
     this.currentState = _state;
+
     _state.history.push( _state );
     ui.showHistory();
+
     if ( _state.isTerminal() ) {
       this.status = 'ended';
 
@@ -131,10 +133,14 @@ const Game = function (aiPlayer) {
     }
   }
 
-  this.start = function () {
+  this.start = function ( isAiTurn ) {
+    debugger;
     if ( this.status === 'beginning' ) {
       this.advanceTo( this.currentState );
       this.status = 'running';
+      if ( isAiTurn ) {
+        this.currentState.turn = 'O';
+      }
     }
   }
 }
